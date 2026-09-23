@@ -18,11 +18,13 @@ main() {
 do {
 
     printf("\n=========================\n       INICIO \n=========================\n");
-    printf("1 - CADASTRAR ALUNOS");
-    printf("2 - VER ALUNOS CADASTRADOS");
-    printf("3 - VER APROVADOS/REPROVADOS");
-    printf("4 - VER BOLETIM");
-    printf("5 - ENCERRAR SISTEMA");
+    printf("1 - CADASTRAR ALUNOS\n");
+    printf("2 - VER ALUNOS CADASTRADOS\n");
+    printf("3 - VER SITUAÇÃO\n");
+    printf("4 - VER BOLETIM\n");
+    printf("5 - ENCERRAR SISTEMA\n");
+    printf("Responda: ");
+    scanf("%d", &opcao);
     
 
 
@@ -39,7 +41,7 @@ do {
     for (int i = 1; i <= quantidade_Alunos; i++)
     {
         printf("\n--- ALUNO %d ---\n", i );    
-        printf("Nome do aluno:");
+        printf("Nome do aluno: ");
         scanf("%49s", aluno[i].nome);
         printf("Primeira nota: ");
         scanf("%f", &aluno[i].nota1);
@@ -59,23 +61,63 @@ do {
     if(total_Alunos == 0) {
         printf("Não temos alunos cadastro no momento!");
     }
-
     else{
-        for (int i = 1; i > total_Alunos; i++)
+        printf("\n=========================\n      ALUNOS CADASTROS \n=========================\n");
+        for (int i = 1; i <= total_Alunos; i++)
         {
             printf("Aluno %d: %s\n", i, aluno[i].nome);
         }
-        
+        break;
     }
+    break;
 
     case 3: 
-        if(total_Alunos == 0) {
+        
+            printf("\n==================\n APROVADOS \n==================\n");
+            for (int i = 1; i <= total_Alunos; i++)
+            {
+                if (aluno[i].media >= 7)
+                {
+                    printf("Aluno %s está APROVADO!");
+                }
+            }
+            printf("\n==================\n RECUPERAÇÃO \n==================\n");
+            for (int i = 1; i <= total_Alunos; i++) 
+            {
+                if(aluno[i].media >= 5 || aluno[i].media < 7) {
+                    printf("Aluno %s está de RECUPERAÇÂO!");
+                }
+            }
+            printf("\n==================\n REPROVADOS \n==================\n");
+            for (int i = 1; i <= total_Alunos; i++) 
+            {
+                if(aluno[i].media < 5 ) {
+                    printf("Aluno %s está REPROVADO!");
+                }
+            }
+        break;
+   
+
+    case 4: 
+        printf("\n=======================\n BOLETIM \n=======================\n");
+        if (total_Alunos == 0)
+        {
             printf("Não temos alunos cadastro no momento!");
         }
-        else{
-            
-        }
 
+        else {
+            for (int i = 1; i < total_Alunos; i++)
+            {
+                printf("Aluno %s\n", aluno[i].nome);
+                printf("   Primeira nota: %.2f\n", aluno[i].nota1);
+                printf("   Segunda nota: %.2f\n", aluno[i].nota2);
+                printf("   Terceira nota: %.2f\n", aluno[i].nota3);
+                printf("   Quarta nota: %.2f\n", aluno[i].nota4);
+                printf("   Média: %.2f\n", aluno[i].media);
+            }
+            break;
+        }
+        break;
 
     default:
         break;
